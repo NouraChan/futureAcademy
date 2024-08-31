@@ -4,7 +4,10 @@ use App\Repository\interface\IdepartmentRepository;
 use App\Repository\departmentRepository;
 use App\Repository\interface\IUserRepository;
 use App\Repository\UserRepository;
+use App\Repository\interface\ICourseRepository;
+use App\Repository\courseRepository;
 use Illuminate\Support\ServiceProvider;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
         }
         $this->app->singleton(IUserRepository::class,UserRepository::class);
         $this->app->singleton(IdepartmentRepository::class,departmentRepository::class);
+        $this->app->singleton(ICourseRepository::class,courseRepository::class)
     }
 
     /**
