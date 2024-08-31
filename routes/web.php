@@ -3,6 +3,7 @@
 use  Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\UsersController;
 use  App\Http\Controllers\departmentController;
+use  App\Http\Controllers\courseController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminRegisterController;
 use App\Http\Controllers\dashboardController; 
@@ -46,6 +47,18 @@ Route::group(['prefix'=>'users'],function(){
     Route::get('/destroy/{id}', [UsersController::class, 'destroy'])->name('user.destroy');
     Route::get('/profile/{id}',[UsersController::class,'show'])->name('user.profile'); 
 })->middleware('auth');
+
+
+// Route Courses
+Route::group(['prefix'=> 'courses'],function(){
+    Route::get('/create',[ courseController::class,'create'])->name('course.create');
+    Route::get('/index', [ courseController::class, 'index'])->name('course.index');
+    Route::post('/store',[ courseController::class,'store'])->name('course.store');
+    Route::get('/edit/{id}',[ courseController::class,'edit'])->name('course.edit');
+    Route::post('/update/{id}',[ courseController::class,'update'])->name('course.update');
+    Route::get('/destroy/{id}', [ courseController::class, 'destroy'])->name('course.destroy');  
+});
+
 
 
 // End Rout Usres
