@@ -7,12 +7,19 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class CoursesController extends Controller
 {
+
+    protected $courseRepository;
+
+    public function __construct(ICourseRepository $courseRepository)
+    {
+        $this->courseRepository = $courseRepository;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view ('courses.index');
     }
 
     /**
@@ -20,46 +27,48 @@ class CoursesController extends Controller
      */
     public function create()
     {
-        //
+        return view ('courses.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(courseRequest $request)
     {
-        //
+        
+        $data = courseDTO::handleInputs($request);
+        $this->courseRepository->create($data);
+        return redirect()->route('course.index');
+        toast('Success Toast','success');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        //$courses = $this->courseRepository->getById($id);
+        //return view('layouts.dashboard.department.show', compact('department'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $course = $this->courseRepository->getById($id);
+        return view('course.edit', compact('course'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(departmentRequest $request, string $id)
     {
-        //
+        // Convert the request to a DTO
+        $data = courseDTO::handleInputs($request);
+
+        // Pass the DTO data as an array to the repository
+        $this->courseRepository->update($data, $id);
+
+        return redirect()->route('course.index')->with('success', 'Course updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $this->courseRepository->delete($id);
+        return redirect()->back();
+    }}
     }
 }
