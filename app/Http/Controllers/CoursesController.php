@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\DTO\courseDTO;
-use App\Http\Requests\courseRequest;
+use App\Http\Requests\CourseRequest;
 use App\Repository\interface\ICourseRepository;
 
 
@@ -23,7 +23,7 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        return view ('courses.index');
+        return view ('course.index');
     }
 
     /**
@@ -31,7 +31,7 @@ class CoursesController extends Controller
      */
     public function create()
     {
-        return view ('courses.create');
+        return view ('course.create');
     }
 
     /**
