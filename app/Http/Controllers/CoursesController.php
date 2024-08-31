@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\DTO\courseDTO;
+use App\Http\Requests\courseRequest;
+use App\Repository\interface\ICourseRepository;
+
 
 class CoursesController extends Controller
 {
